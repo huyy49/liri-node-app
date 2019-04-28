@@ -99,7 +99,7 @@ Language: English, French, Arabic, German
 Plot: A fearless, globe-trotting, terrorist-battling secret agent has his life turned upside down when he discovers his wife might be having an affair with a used car salesman while terrorists smuggle nuclear war heads into the United States.
 Actors: Arnold Schwarzenegger, Jamie Lee Curtis, Tom Arnold, Bill Paxton
 ------------------------------------------------------------
-Command: node liri.js do-what-it-says 
+Command: node liri.js do-what-it-says
 Name: I Want It That Way
 Artists: Backstreet Boys
 Spotify URLs: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6

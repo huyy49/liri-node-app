@@ -66,7 +66,6 @@ var MUSIC = function () {
     var url = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
     axios.get(url).then(function (response) {
       var jsonData = response.data;
-
       var movieData = [
         "Title: " + jsonData.Title,
         "Year: " + jsonData.Year,
@@ -81,7 +80,7 @@ var MUSIC = function () {
       music.appendLog(movieData);
     });
   };
-  this.doWhatItSays = function() {
+  this.doWhatItSays = function () {
     fs.readFile("random.txt", "utf8", function (error, data) {
       if (error) {
         return console.log(error);
@@ -91,8 +90,8 @@ var MUSIC = function () {
       // console.log(dataArr);
       var method = dataArr[0];
       var word = dataArr[1];
-      // console.log(method);
-      // console.log(word);
+      console.log(method);
+      console.log(word);
 
       // Callback functions
       switch (method) {
@@ -108,13 +107,12 @@ var MUSIC = function () {
           console.log("Searching for Movie: " + word);
           music.movieThis(word);
           break;
-      }
-    });
+      };
+    })
   };
-  this.appendLog = function(data){
+  this.appendLog = function (data) {
     fs.appendFile("log.txt", "Command: node liri.js " + search + " " + term + "\n" + data + divider, function (err) {
       if (err) throw err;
-      console.log(process.argv[1]);
       console.log(data);
     });
   }
@@ -124,7 +122,7 @@ var MUSIC = function () {
 
 var music = new MUSIC();
 
-var final = function(final){
+var final = function (final) {
   switch (final) {
     case "concert-this":
       console.log("Searching for Concerts: " + term);
