@@ -1,0 +1,107 @@
+Command: node liri.js concert-this ed sheran
+Venue: GROUPAMA STADIUM
+Location: Decines Charpieu, , France
+Date of Event: 05/26/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Estadio da Luz
+Location: Lisbon, , Portugal
+Date of Event: 06/02/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Stadio San Siro
+Location: Milano, , Italy
+Date of Event: 06/19/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Hockenheim-Ring GmbH
+Location: Hockenheim, , Germany
+Date of Event: 06/22/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Visarno Arena
+Location: Florence, , Italy
+Date of Event: 06/14/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Wörthersee Stadion
+Location: Klagenfurt, , Austria
+Date of Event: 06/29/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: NATIONAL ARENA
+Location: Bucuresti, , Romania
+Date of Event: 07/03/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Letnany Aerodrome
+Location: Prague, , Czech Republic
+Date of Event: 07/08/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Theatre Royal Haymarket
+Location: London, , United Kingdom
+Date of Event: 07/14/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Otkritie Arena
+Location: Moscow, , Russia
+Date of Event: 07/19/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Malmi Airport
+Location: Helsinki, , Finland
+Date of Event: 07/23/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Tusindårsskoven
+Location: Odense, , Denmark
+Date of Event: 07/27/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Messegelände
+Location: Hannover, , Germany
+Date of Event: 08/03/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Chantry Park, IP2 0BS
+Location: Ipswich, , United Kingdom
+Date of Event: 08/26/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Laugardalsvöllur
+Location: Reykjavik, , Iceland
+Date of Event: 08/11/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Chantry Park
+Location: Suffolk Hill, , United Kingdom
+Date of Event: 08/25/2019
+------------------------------------------------------------
+Command: node liri.js concert-this ed sheran
+Venue: Ile Obudai / Hongrie
+Location: Budapest, , Hungary
+Date of Event: 08/07/2019
+------------------------------------------------------------
+Command: node liri.js spotify-this-song break free
+Name: Break Free
+Artists: Ariana Grande
+Spotify URLs: https://open.spotify.com/track/12KUFSHFgT0XCoiSlvdQi4
+Album: My Everything (Deluxe)
+------------------------------------------------------------
+Command: node liri.js movie-this true-lies
+Title: True Lies
+Year: 1994
+IMDB Rating: 7.2/10
+Rotten Tomatoes Rating: 71%
+Country: USA
+Language: English, French, Arabic, German
+Plot: A fearless, globe-trotting, terrorist-battling secret agent has his life turned upside down when he discovers his wife might be having an affair with a used car salesman while terrorists smuggle nuclear war heads into the United States.
+Actors: Arnold Schwarzenegger, Jamie Lee Curtis, Tom Arnold, Bill Paxton
+------------------------------------------------------------
+Command: node liri.js do-what-it-says 
+Name: I Want It That Way
+Artists: Backstreet Boys
+Spotify URLs: https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
+Album: The Hits--Chapter One
+------------------------------------------------------------

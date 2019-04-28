@@ -13,11 +13,14 @@ var moment = require("moment");
 
 var fs = require("fs");
 
-var method = "";
-var word = "";
+// var method = "";
+// var word = "";
+
+var search = process.argv[2];
+var term = process.argv.slice(3).join(" ");
 
 var MUSIC = function () {
-  var divider = "\n------------------------------------------------------------";
+  var divider = "\n------------------------------------------------------------\n";
 
   this.concertThis = function (singer) {
     var url = "https://rest.bandsintown.com/artists/" + singer + "/events?app_id=codingbootcamp";
@@ -29,11 +32,12 @@ var MUSIC = function () {
           "Venue: " + jsonData[i].venue.name,
           "Location: " + jsonData[i].venue.city + ", " + jsonData[i].venue.region + ", " + jsonData[i].venue.country,
           "Date of Event: " + moment(jsonData[i].datetime).format("L"),
-        ].join("\n\n");
+        ].join("\n");
         console.log(concertData + divider);
         // console.log(jsonData[i].venue.name);
         // console.log(jsonData[i].venue.city + ", " + jsonData[i].venue.region + ", " + jsonData[i].venue.country);
         // console.log(moment(jsonData[i].datetime).format("L"));
+        music.appendLog(concertData);
       };
     });
   };
@@ -53,8 +57,9 @@ var MUSIC = function () {
         "Artists: " + songItems.artists[0].name,
         "Spotify URLs: " + songItems.external_urls.spotify,
         "Album: " + songItems.album.name,
-      ].join("\n\n");
+      ].join("\n");
       console.log(songData + divider);
+      music.appendLog(songData);
     });
   };
   this.movieThis = function (movie) {
@@ -71,62 +76,71 @@ var MUSIC = function () {
         "Language: " + jsonData.Language,
         "Plot: " + jsonData.Plot,
         "Actors: " + jsonData.Actors,
-      ].join("\n\n");
+      ].join("\n");
       console.log(movieData + divider);
+      music.appendLog(movieData);
     });
   };
-  this.doWhatItSays = function(method, term) {
+  this.doWhatItSays = function() {
     fs.readFile("random.txt", "utf8", function (error, data) {
       if (error) {
         return console.log(error);
       }
-      console.log(data);
+      // console.log(data);
       var dataArr = data.split(",");
-      console.log(dataArr);
-      method = dataArr[0];
-      word = dataArr[1];
+      // console.log(dataArr);
+      var method = dataArr[0];
+      var word = dataArr[1];
+      // console.log(method);
+      // console.log(word);
+
+      // Callback functions
+      switch (method) {
+        case "concert-this":
+          console.log("Searching for Concerts: " + word);
+          music.concertThis(word);
+          break;
+        case "spotify-this-song":
+          console.log("Searching for Song: " + word);
+          music.spotifyThisSong(word);
+          break;
+        case "movie-this":
+          console.log("Searching for Movie: " + word);
+          music.movieThis(word);
+          break;
+      }
     });
   };
-  this.method = method;
-  this.word = word;
+  this.appendLog = function(data){
+    fs.appendFile("log.txt", "Command: node liri.js " + search + " " + term + "\n" + data + divider, function (err) {
+      if (err) throw err;
+      console.log(process.argv[1]);
+      console.log(data);
+    });
+  }
 };
-
-var search = process.argv[2];
-var term = process.argv.slice(3).join(" ");
 // console.log(search);
 // console.log(term);
 
 var music = new MUSIC();
 
-// if (!search) {
-//   search = "Concert-This";
-// }
-
-// // By default, if no search term is provided, search for "Andy Griffith"
-// if (!term) {
-//   term = "Backstreet Boyes";
-// };
-
 var final = function(final){
   switch (final) {
-    case "Concert-This":
+    case "concert-this":
       console.log("Searching for Concerts: " + term);
       music.concertThis(term);
       break;
-    case "Spotify-This-Song":
+    case "spotify-this-song":
       console.log("Searching for Song: " + term);
       music.spotifyThisSong(term);
       break;
-    case "Movie-This":
+    case "movie-this":
       console.log("Searching for Movie: " + term);
       music.movieThis(term);
       break;
     case "do-what-it-says":
       console.log("Do what it says: ");
       music.doWhatItSays();
-      // var method = music.doWhatItSays().method;
-      // var word = music.doWhatItSays().word;
-      music.method(word);
       break;
     default:
       console.log("Searching for Concerts for: Backstreet Boys");
