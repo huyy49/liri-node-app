@@ -17,7 +17,8 @@ var fs = require("fs");
 // var word = "";
 
 var search = process.argv[2];
-var term = process.argv.slice(3).join(" ");
+var termEntered = process.argv[3];
+var term = process.argv.slice(3).join("");
 
 var MUSIC = function () {
   var divider = "\n------------------------------------------------------------\n";
@@ -26,19 +27,24 @@ var MUSIC = function () {
     var url = "https://rest.bandsintown.com/artists/" + singer + "/events?app_id=codingbootcamp";
     axios.get(url).then(function (response) {
       var jsonData = response.data;
-      // console.log(jsonData);
-      for (var i = 0; i < jsonData.length; i++) {
-        var concertData = [
-          "Venue: " + jsonData[i].venue.name,
-          "Location: " + jsonData[i].venue.city + ", " + jsonData[i].venue.region + ", " + jsonData[i].venue.country,
-          "Date of Event: " + moment(jsonData[i].datetime).format("L"),
-        ].join("\n");
-        console.log(concertData + divider);
-        // console.log(jsonData[i].venue.name);
-        // console.log(jsonData[i].venue.city + ", " + jsonData[i].venue.region + ", " + jsonData[i].venue.country);
-        // console.log(moment(jsonData[i].datetime).format("L"));
-        music.appendLog(concertData);
-      };
+      // console.log("js: " + jsonData);
+      if (jsonData.includes("warn=Not found")) {
+        console.log("No concert is currently available. Please try a different band/musician.");
+        // return false;
+      } else {
+        for (var i = 0; i < jsonData.length; i++) {
+          var concertData = [
+            "Venue: " + jsonData[i].venue.name,
+            "Location: " + jsonData[i].venue.city + ", " + jsonData[i].venue.region + ", " + jsonData[i].venue.country,
+            "Date of Event: " + moment(jsonData[i].datetime).format("L"),
+          ].join("\n");
+          console.log(concertData + divider);
+          // console.log(jsonData[i].venue.name);
+          // console.log(jsonData[i].venue.city + ", " + jsonData[i].venue.region + ", " + jsonData[i].venue.country);
+          // console.log(moment(jsonData[i].datetime).format("L"));
+          music.appendLog(concertData);
+        };
+      }
     });
   };
   this.spotifyThisSong = function (song) {
@@ -46,38 +52,48 @@ var MUSIC = function () {
       if (err) {
         return console.log("Error occurred: " + err);
       };
-      var songItems = data.tracks.items[0];
+      var songItems = data.tracks.items;
+      if (songItems.length === 0) {
+        console.log("No result. Please try a different song.");
+      } else {
+        for (var i = 0; i < songItems.length; i++) {
+          var songData = [
+            "Name: " + songItems[i].name,
+            "Artists: " + songItems[i].artists[0].name,
+            "Spotify URLs: " + songItems[i].external_urls.spotify,
+            "Album: " + songItems[i].album.name,
+          ].join("\n");
+          console.log(songData + divider);
+          music.appendLog(songData);
+        }
+      }
       // console.log(songItems);
       // console.log(songItems.name);
       // console.log(songItems.artists[0].name);
       // console.log(songItems.external_urls.spotify);
       // console.log(songItems.album.name);
-      var songData = [
-        "Name: " + songItems.name,
-        "Artists: " + songItems.artists[0].name,
-        "Spotify URLs: " + songItems.external_urls.spotify,
-        "Album: " + songItems.album.name,
-      ].join("\n");
-      console.log(songData + divider);
-      music.appendLog(songData);
     });
   };
   this.movieThis = function (movie) {
     var url = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
     axios.get(url).then(function (response) {
       var jsonData = response.data;
-      var movieData = [
-        "Title: " + jsonData.Title,
-        "Year: " + jsonData.Year,
-        "IMDB Rating: " + jsonData.Ratings[0].Value,
-        "Rotten Tomatoes Rating: " + jsonData.Ratings[1].Value,
-        "Country: " + jsonData.Country,
-        "Language: " + jsonData.Language,
-        "Plot: " + jsonData.Plot,
-        "Actors: " + jsonData.Actors,
-      ].join("\n");
-      console.log(movieData + divider);
-      music.appendLog(movieData);
+      if (jsonData.length === 0) {
+        console.log("No result. Please try a different movie.");
+      } else {
+        var movieData = [
+          "Title: " + jsonData.Title,
+          "Year: " + jsonData.Year,
+          "IMDB Rating: " + jsonData.Ratings[0].Value,
+          "Rotten Tomatoes Rating: " + jsonData.Ratings[1].Value,
+          "Country: " + jsonData.Country,
+          "Language: " + jsonData.Language,
+          "Plot: " + jsonData.Plot,
+          "Actors: " + jsonData.Actors,
+        ].join("\n");
+        console.log(movieData + divider);
+        music.appendLog(movieData);
+      }
     });
   };
   this.doWhatItSays = function () {
@@ -125,14 +141,24 @@ var music = new MUSIC();
 var final = function (final) {
   switch (final) {
     case "concert-this":
-      console.log("Searching for Concerts: " + term);
-      music.concertThis(term);
+      if (termEntered == undefined || termEntered == null) {
+        console.log("Please enter an artist to search.")
+      } else {
+        console.log("Searching for Concerts: " + term);
+        music.concertThis(term);
+      };
       break;
     case "spotify-this-song":
+      if (termEntered == undefined || termEntered == null) {
+        term = "The Sign";
+      };
       console.log("Searching for Song: " + term);
       music.spotifyThisSong(term);
       break;
     case "movie-this":
+      if (termEntered == undefined || termEntered == null) {
+        term = "Mr. Nobody";
+      };
       console.log("Searching for Movie: " + term);
       music.movieThis(term);
       break;
